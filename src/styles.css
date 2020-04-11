@@ -1,0 +1,36 @@
+.text-grey {
+    font-size: small;
+    color: grey;
+}
+
+.text-title {
+    font-size: x-large;
+    font-weight: bold;
+    font-family: roboto;
+}
+
+.text-price {
+    font-size: large;
+    font-weight: bold;
+    font-family: roboto;
+}
+
+.btn-buy {
+    color: #423aa5;
+    background-color: white;
+    font-size: x-small;
+    height: 50px;
+    border-radius: 0px;
+    border: 1px solid #423aa5;
+    transition: 0.3s;
+}
+
+.btn-buy:hover:enabled {
+    color: white;
+    background-color: #423aa5;
+}
+
+.btn-buy:disabled {
+    color: white;
+    background-color: grey;
+}
