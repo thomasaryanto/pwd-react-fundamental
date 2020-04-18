@@ -1,0 +1,62 @@
+{
+  "posts": [],
+  "comments": [],
+  "users": [
+    {
+      "id": 1,
+      "username": "seto",
+      "password": "password",
+      "role": "user",
+      "fullName": "seto haha"
+    },
+    {
+      "username": "tom",
+      "password": "123",
+      "role": "admin",
+      "fullName": "Thomas Ariyanto",
+      "id": 2
+    },
+    {
+      "username": "asd",
+      "password": "asd",
+      "role": "user",
+      "fullName": "asd",
+      "id": 3
+    },
+    {
+      "username": "asdas",
+      "password": "asd",
+      "role": "",
+      "fullName": "asdas",
+      "id": 4
+    },
+    {
+      "username": "qwe",
+      "password": "asd",
+      "role": "operator",
+      "fullName": "qwasd",
+      "id": 5
+    },
+    {
+      "username": "admin",
+      "password": "adm",
+      "role": "admin",
+      "fullName": "admin",
+      "id": 6
+    },
+    {
+      "username": "asda",
+      "password": "asd",
+      "role": "admin",
+      "fullName": "asda",
+      "id": 7
+    },
+    {
+      "username": "tomtom",
+      "password": "tomtom",
+      "role": "admin",
+      "fullName": "tom tom",
+      "id": 8
+    }
+  ]
+}

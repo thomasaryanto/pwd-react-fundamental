@@ -28,35 +28,35 @@ class CounterScreen extends React.Component {
         }
 
         return (
-            <>
-            <div className="row">
-                <div className="col-4">
-                    <h1>Counter 1 = {this.state.counter1}</h1>
-                    <input className="btn btn-primary" type="button" value="+" onClick={() => this.setState({counter1: this.state.counter1 + 1})} />
-                    <input className="btn btn-danger" type="button" value="-" onClick={() => this.setState({counter1: this.state.counter1 - 1})} />
+            <div className="App container-fluid">
+                <div className="row">
+                    <div className="col-4">
+                        <h1>Counter 1 = {this.state.counter1}</h1>
+                        <input className="btn btn-primary" type="button" value="+" onClick={() => this.setState({counter1: this.state.counter1 + 1})} />
+                        <input className="btn btn-danger" type="button" value="-" onClick={() => this.setState({counter1: this.state.counter1 - 1})} />
+                    </div>
+                    <div className="col-4">
+                        <h1>Counter 2 = {this.state.counter2}</h1>
+                        <input className="btn btn-primary" type="button" value="+" onClick={() => this.setState({counter2: this.state.counter2 + 1})} />
+                        <input className="btn btn-danger" type="button" value="-" onClick={() => this.setState({counter2: this.state.counter2 - 1})} />
+                    </div>
+                    <div className="col-4">
+                        <h1>Counter 3 = {this.state.counter3}</h1>
+                        <input className="btn btn-primary" type="button" value="+" onClick={() => this.setState({counter3: this.state.counter3 + 1})} />
+                        <input className="btn btn-danger" type="button" value="-" onClick={() => this.setState({counter3: this.state.counter3 - 1})} />
+                    </div>
                 </div>
-                <div className="col-4">
-                    <h1>Counter 2 = {this.state.counter2}</h1>
-                    <input className="btn btn-primary" type="button" value="+" onClick={() => this.setState({counter2: this.state.counter2 + 1})} />
-                    <input className="btn btn-danger" type="button" value="-" onClick={() => this.setState({counter2: this.state.counter2 - 1})} />
-                </div>
-                <div className="col-4">
-                    <h1>Counter 3 = {this.state.counter3}</h1>
-                    <input className="btn btn-primary" type="button" value="+" onClick={() => this.setState({counter3: this.state.counter3 + 1})} />
-                    <input className="btn btn-danger" type="button" value="-" onClick={() => this.setState({counter3: this.state.counter3 - 1})} />
+                <br></br>
+                <div className="row">
+                    <div className="col-12">
+                        <h1>All counter</h1>
+                        <input className="btn btn-primary" type="button" value="+" onClick={() => changeAll(true)} />
+                        <input className="btn btn-danger" type="button" value="-" onClick={() => changeAll(false)} />
+                        <br></br>
+                        <input className="btn btn-info" type="button" value="RESET" onClick={resetAll} />
+                    </div>
                 </div>
             </div>
-            <br></br>
-            <div className="row">
-                <div className="col-12">
-                    <h1>All counter</h1>
-                    <input className="btn btn-primary" type="button" value="+" onClick={() => changeAll(true)} />
-                    <input className="btn btn-danger" type="button" value="-" onClick={() => changeAll(false)} />
-                    <br></br>
-                    <input className="btn btn-info" type="button" value="RESET" onClick={resetAll} />
-                </div>
-            </div>
-            </>
         )
     }
 }
