@@ -11,11 +11,14 @@ import LifecycleScreen from './views/screens/LifecycleScreen';
 import HomeScreen from './views/screens/HomeScreen';
 import RegisterScreen from './views/screens/RegisterScreen';
 import LoginScreen from './views/screens/LoginScreen';
+import TodoReduxScreen from './views/screens/TodoReduxScreen';
+
 
 import PageNotFound from './views/screens/errors/PageNotFound';
 import Navbar from './views/components/Navbar';
 import ProfileScreen from './views/screens/ProfileScreen';
 
+export const AuthContext = React.createContext();
 function App() {
 
   return (
@@ -29,6 +32,7 @@ function App() {
         <Route exact path="/input" component={InputScreen} />
         <Route exact path="/lifecycle" component={LifecycleScreen} />
         <Route exact path="/profile/:username" component={ProfileScreen} />
+        <Route exact path="/todo" component={TodoReduxScreen} />
         <Route path="*" component={PageNotFound} />
       </Switch>
     </>

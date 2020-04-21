@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import Axios from "axios"
 import { API_URL } from "../../constants/API";
 
@@ -41,7 +40,7 @@ class ProfileScreen extends React.Component {
                         <br />
                         <div className="card align-items-center">
                             <br />
-                            <img src={avatar} width="100" />
+                            <img src={avatar} width="100" alt="Profile" />
                             <h2>{fullname}</h2>
                             <br />
                             <p>Username : {username} </p>

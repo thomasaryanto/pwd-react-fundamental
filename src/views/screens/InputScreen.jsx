@@ -1,5 +1,6 @@
 import React from "react"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
+import { connect } from "react-redux"
 
 class InputScreen extends React.Component {
     state = {
@@ -7,30 +8,37 @@ class InputScreen extends React.Component {
         email: "",
         length: 0
     }
-    
+
     inputHandler = (event, field) => {
-        this.setState({[field]: event.target.value})
+        this.setState({ [field]: event.target.value })
     }
 
     render() {
-        const {username, email, length} = this.state
+        const { username, email, length } = this.state
 
 
         return (
             <div className="App container-fluid">
                 <h1>Input Screen</h1>
+                <h3>{this.props.todo.todoInput}</h3>
                 <h3>Welcome {username}</h3>
                 <h3>Email {email}</h3>
-                <input onChange={(e) => this.inputHandler(e, "username")} type="text" placeholder="Username"/>
-                <br/>
-                <input onChange={(e) => this.inputHandler(e, "email")} type="text" placeholder="Email"/>
-                <br/>
-                <textarea onChange={(e) => this.setState({length: e.target.value.length})} cols="30" rows="10"></textarea>
+                <input onChange={(e) => this.inputHandler(e, "username")} type="text" placeholder="Username" />
+                <br />
+                <input onChange={(e) => this.inputHandler(e, "email")} type="text" placeholder="Email" />
+                <br />
+                <textarea onChange={(e) => this.setState({ length: e.target.value.length })} cols="30" rows="10"></textarea>
                 <p>{length} / 140</p>
-                <Link to={"profile/"+this.state.username}><button>Login</button></Link>
+                <Link to={"profile/" + this.state.username}><button>Login</button></Link>
             </div>
         )
     }
 }
 
-export default InputScreen
+const mapStateToProps = state => {
+    return {
+        todo: state.todo
+    }
+}
+
+export default connect((state) => ({ todo: state.todo }))(InputScreen)
