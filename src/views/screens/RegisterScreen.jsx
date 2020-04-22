@@ -3,6 +3,8 @@ import { Redirect } from "react-router-dom"
 import Axios from "axios"
 import { API_URL } from "../../constants/API";
 import { Spinner } from "reactstrap"
+import { connect } from "react-redux"
+import { registerHandler } from "../../redux/actions"
 
 class RegisterScreen extends React.Component {
 
@@ -23,53 +25,18 @@ class RegisterScreen extends React.Component {
     register = () => {
         const { reg_username, reg_password, reg_repeat_password, reg_role, reg_fullname } = this.state
 
-        if (reg_username && reg_password && reg_repeat_password && reg_role && reg_fullname) {
-            if (reg_password === reg_repeat_password) {
-                this.setState({ registering: true })
+        // this.setState({ registering: true })
 
-                Axios.get(API_URL + "/users", {
-                    params: {
-                        username: reg_username
-                    }
-                })
-                    .then((res) => {
-                        console.log(res.data.length)
-
-                        if (res.data.length > 0) {
-                            alert("Username sudah terpakai!")
-                        }
-                        else {
-                            Axios.post(API_URL + "/users", {
-                                username: reg_username,
-                                password: reg_password,
-                                role: reg_role,
-                                fullName: reg_fullname
-                            })
-                                .then(() => {
-                                    alert("Registrasi berhasil!")
-                                    // this.setState({ is_register: true })
-
-                                })
-                                .catch((err) => {
-                                    alert("Terjadi kesalahan saat mengambil data!\n" + err)
-                                })
-                        }
-                        this.setState({ registering: false })
-                    })
-                    .catch((err) => {
-                        alert("Terjadi kesalahan saat mengambil data!\n" + err)
-                        this.setState({ registering: false })
-
-                    })
-
-            }
-            else {
-                alert("Password tidak cocok!")
-            }
+        const userData = {
+            username: reg_username,
+            password: reg_password,
+            repeat_password: reg_repeat_password,
+            role: reg_role,
+            fullName: reg_fullname
         }
-        else {
-            alert("Data belum lengkap!")
-        }
+        this.props.registerHandler(userData)
+
+        // this.setState({ registering: false })
     }
 
 
@@ -85,7 +52,16 @@ class RegisterScreen extends React.Component {
                 <div className="row justify-content-md-center">
                     <div className="col-4 ">
                         <h2>Register</h2>
-                        <br /><br />
+                        <br />
+                        {
+                            this.props.user.errMsg != "" ?
+                                (
+                                    <div class="alert alert-danger" role="alert">
+                                        {this.props.user.errMsg}
+                                    </div>
+                                )
+                                : null
+                        }
                         <div className="card align-items-center">
                             <br />
                             <select defaultValue="" onChange={(e) => this.inputHandler(e, "reg_role")} value={reg_role} className="form-control col-8 mt-2">
@@ -113,4 +89,4 @@ class RegisterScreen extends React.Component {
     }
 }
 
-export default RegisterScreen
+export default connect((state) => ({ user: state.user }), { registerHandler })(RegisterScreen)

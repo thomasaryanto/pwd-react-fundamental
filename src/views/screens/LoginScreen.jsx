@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom"
 import { API_URL } from "../../constants/API";
 import { Spinner } from "reactstrap"
 import { connect } from "react-redux"
-import { userInputHandler } from "../../redux/actions"
+import { userInputHandler, loginHandler } from "../../redux/actions"
 
 class LoginScreen extends React.Component {
 
@@ -23,29 +23,17 @@ class LoginScreen extends React.Component {
     login = () => {
         const { log_username, log_password } = this.state
 
-        this.setState({ is_loading: true })
+        const userData = {
+            username: log_username,
+            password: log_password
+        }
 
-        Axios.get(API_URL + "/users", {
-            params: {
-                username: log_username,
-                password: log_password
-            }
-        })
-            .then((res) => {
-                if (Object.keys(res.data).length > 0) {
-                    this.setState({ is_login: true })
-                    this.setState({ is_loading: false })
-                    this.props.userInputHandler(res.data[0].username)
-                }
-                else {
-                    swal("Error!", "Username tidak ditemukan / password salah!", "error");
-                    this.setState({ is_loading: false })
-                }
-            })
-            .catch((err) => {
-                alert("Terjadi kesalahan saat mengambil data!\n" + err)
-                this.setState({ is_loading: false })
-            })
+        //this.setState({ is_loading: true })
+
+        this.props.loginHandler(userData)
+
+        //this.setState({ is_loading: false })
+
     }
 
 
@@ -60,7 +48,11 @@ class LoginScreen extends React.Component {
             <div className="App container-fluid">
                 <div className="row justify-content-md-center">
                     <div className="col-4 ">
+
+                        {this.props.user.errMsg != "" ? (<b>error</b>) : null}
+
                         <h2>Login</h2>
+                        <p>username: {this.props.user.username}</p>
                         <br />
                         <div className="card align-items-center">
                             <br />
@@ -79,4 +71,4 @@ class LoginScreen extends React.Component {
     }
 }
 
-export default connect((state) => state.user, { userInputHandler })(LoginScreen)
+export default connect((state) => ({ user: state.user }), { userInputHandler, loginHandler })(LoginScreen)
