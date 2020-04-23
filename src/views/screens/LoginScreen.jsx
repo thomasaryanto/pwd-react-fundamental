@@ -6,14 +6,22 @@ import { API_URL } from "../../constants/API";
 import { Spinner } from "reactstrap"
 import { connect } from "react-redux"
 import { userInputHandler, loginHandler } from "../../redux/actions"
+import Cookie from 'universal-cookie';
+
+const cookieObject = new Cookie();
 
 class LoginScreen extends React.Component {
 
     state = {
         log_username: "",
         log_password: "",
-        is_login: false,
         is_loading: false
+    }
+
+    componentDidUpdate() {
+        if (this.props.user.id) {
+            cookieObject.set("authData", JSON.stringify(this.props.user))
+        }
     }
 
     inputHandler = (event, field) => {
@@ -32,28 +40,33 @@ class LoginScreen extends React.Component {
 
         this.props.loginHandler(userData)
 
-        //this.setState({ is_loading: false })
+        // this.setState({ is_login: true })
 
     }
 
-
     render() {
-        const { log_username, log_password, is_login, is_loading } = this.state
 
-        if (is_login) {
-            return <Redirect to={"profile/" + log_username} />
+        const { log_username, log_password, is_loading } = this.state
+
+        if (this.props.user.id) {
+            return <Redirect to={"profile/" + this.props.user.username} />
         }
 
         return (
             <div className="App container-fluid">
                 <div className="row justify-content-md-center">
                     <div className="col-4 ">
-
-                        {this.props.user.errMsg != "" ? (<b>error</b>) : null}
-
                         <h2>Login</h2>
-                        <p>username: {this.props.user.username}</p>
                         <br />
+                        {
+                            this.props.user.errMsg != "" ?
+                                (
+                                    <div class="alert alert-danger" role="alert">
+                                        {this.props.user.errMsg}
+                                    </div>
+                                )
+                                : null
+                        }
                         <div className="card align-items-center">
                             <br />
                             <input onChange={(e) => this.inputHandler(e, "log_username")} className="form-control col-8 mt-2" type="text" value={log_username} placeholder="Username" />

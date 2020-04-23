@@ -1,8 +1,18 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import { connect } from "react-redux"
+import { logoutHandler } from "../../redux/actions"
+import Cookie from 'universal-cookie';
+
+const cookieObject = new Cookie();
 
 class Navbar extends React.Component {
+
+    logout = () => {
+        cookieObject.remove("authData")
+        this.props.logoutHandler()
+    }
+
     render() {
         return (
 
@@ -25,7 +35,10 @@ class Navbar extends React.Component {
                                     </>
                                 ) :
                                 (
-                                    <Link className="nav-item nav-link" to={"/profile/" + this.props.user.username}>Hello, {this.props.user.username}!</Link>
+                                    <>
+                                        <Link className="nav-item nav-link" to={"/profile/" + this.props.user.username}>Hello, {this.props.user.username}!</Link>
+                                        <a href="#" className="nav-item nav-link" onClick={this.logout}>Logout</a>
+                                    </>
                                 )
                         }
                     </div>
@@ -44,4 +57,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Navbar)
+export default connect(mapStateToProps, { logoutHandler })(Navbar)
